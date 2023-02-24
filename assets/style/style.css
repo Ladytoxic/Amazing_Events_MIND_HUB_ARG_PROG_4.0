@@ -3,7 +3,15 @@
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
+    letter-spacing: 1px;
 }
+
+a,
+button,
+input {
+    transition: all 0.3s;
+}
+
 
 nav {
     display: flex;
@@ -11,22 +19,107 @@ nav {
     align-items: center;
     padding: 1rem;
     height: 5rem;
+    background-color: #e9a6c5;
+    color: antiquewhite;
 }
 
 li {
     list-style: none;
-    display: inline;
+    display: inline-block;
     margin: 0 1rem;
+
 }
 
 nav a {
     text-decoration: none;
     border: 1px solid #df6da3;
     padding: 0.5rem 1rem;
-    box-shadow: 1px 1px 2px #d90368;
+    box-shadow: 1px 1px#d90368;
     font-weight: 500;
-    color: black;
+    color: rgb(255, 255, 255);
 
+}
+
+#menu {
+    display: none;
+}
+
+main {
+    min-height: 60vh;
+    margin: 1rem 0rem;
+}
+
+
+.hero {
+    height: 20vh;
+    width: 100vw;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #df6da3;
+    padding: 1rem;
+    gap: 1rem;
+    width: 100%;
+    margin: 1rem 0rem;
+    border-radius: 1rem;
+    box-shadow: 3px 3px;
+}
+
+.search label {
+    padding: 0.1rem;
+}
+
+.search div {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 3;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+input[type="text"] {
+    text-indent: 1rem;
+    width: 80%;
+    flex-grow: 2;
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card {
+    box-shadow: -2px -2px;
+}
+
+.card a {
+    background-color: #df6da3;
+    color: antiquewhite;
+    transition: all 0.3s;
+    text-decoration: none;
+    padding: 0.3rem 1rem;
+    border-radius: 0.5rem;
+}
+
+a:hover {
+    background-color: #d90368;
+    transform: scale(1.2);
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
 }
 
 .container-fluid,
@@ -34,13 +127,14 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+
 }
 
 i {
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-shadow: 0px 3px 2px #5e5e5ea9;
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-shadow: 0px 1px 1px #5e5e5ea9;
+    color: antiquewhite;
 }
 
 button {
@@ -48,10 +142,15 @@ button {
     background: none;
 }
 
+button:hover {
+    transform: scale(1.2);
+}
+
 footer {
-    position: fixed;
-    bottom: 0;
     width: 100%;
+    background-color: #d90368;
+    color: antiquewhite;
+    padding: 1rem;
 }
 
 .social {
@@ -64,7 +163,63 @@ footer {
 .social button {
     width: 3rem;
     height: 3rem;
-    border: 2px solid rgba(0, 0, 0, 0.774);
+    border: 2px solid antiquewhite;
     border-radius: 100%;
     text-align: center;
+    color: antiquewhite;
+}
+
+
+
+/* Mediaquerie */
+
+@media (max-width: 900px) {
+    nav li {
+        margin: 0 auto;
+    }
+
+
+}
+
+@media (max-width: 750px) {
+    nav {
+        align-items: start;
+        height: auto;
+        transition: all 0.5s;
+    }
+
+    nav li {
+        display: block;
+        text-align: right;
+        margin: 1rem;
+    }
+
+    nav a {
+        width: 100%;
+    }
+
+    #menu {
+        display: block;
+    }
+
+    nav #menu i.bi-x-lg {
+        display: none;
+    }
+
+    nav ul.menu-visible {
+        display: none;
+    }
+
+
+
+    footer {
+        display: block;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .social {
+        margin: 1rem;
+    }
+
 }
