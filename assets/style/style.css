@@ -211,7 +211,7 @@ thead th {
 table,
 td,
 th {
-    border: 1px solid gray;
+    border: 1px solid gray !important;
     padding: 1rem;
 }
 
