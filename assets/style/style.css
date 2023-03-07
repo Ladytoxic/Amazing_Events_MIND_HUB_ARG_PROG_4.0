@@ -8,10 +8,10 @@
 
 a,
 button,
-input {
+input,
+input[type="submit"] {
     transition: all 0.3s;
 }
-
 
 nav {
     display: flex;
@@ -49,6 +49,12 @@ main {
     margin: 1rem 0rem;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
 
 .hero {
     height: 20vh;
@@ -92,13 +98,19 @@ input[type="text"] {
 .cards {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 1rem;
 }
 
 .card {
     box-shadow: -2px -2px;
+}
+
+.card img {
+    width: 100%;
+    height: 150Px;
+    object-fit: cover;
 }
 
 .card a {
@@ -110,7 +122,8 @@ input[type="text"] {
     border-radius: 0.5rem;
 }
 
-a:hover {
+a:hover,
+.contant input[type="submit"]:hover {
     background-color: #d90368;
     transform: scale(1.2);
 }
@@ -121,6 +134,7 @@ a:hover {
     align-items: center;
     padding: 1rem;
 }
+
 
 .container-fluid,
 footer {
@@ -169,6 +183,44 @@ footer {
     color: antiquewhite;
 }
 
+.contant {
+    width: 60%;
+
+}
+
+.contant input,
+.contant textarea {
+    display: block;
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+    width: 100%;
+    padding: .5rem;
+    margin-bottom: .5rem;
+}
+
+.contant input[type="submit"] {
+    width: 10rem;
+    float: right;
+    margin: 1rem;
+}
+
+table {
+    border-collapse: separate;
+    margin: auto;
+}
+
+thead th {
+    background-color: #e4abc6;
+    border-bottom: 2px solid black;
+}
+
+table,
+td,
+th {
+    border: 1px solid gray !important;
+    padding: 1rem;
+}
+
 
 
 /* Mediaquerie */
@@ -176,6 +228,10 @@ footer {
 @media (max-width: 900px) {
     nav li {
         margin: 0 auto;
+    }
+
+    .contant {
+        width: 80%;
     }
 
 
@@ -188,7 +244,7 @@ footer {
         transition: all 0.5s;
     }
 
-    nav li {
+    nav ul , nav li {
         display: block;
         text-align: right;
         margin: 1rem;
@@ -210,6 +266,9 @@ footer {
         display: none;
     }
 
+    .contant {
+        width: 90%;
+    }
 
 
     footer {
