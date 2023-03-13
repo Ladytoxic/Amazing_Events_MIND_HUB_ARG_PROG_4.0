@@ -1,36 +1,92 @@
-function buscarEventosPasados(data) {
-    const eventos_pasado = [];
-    
-    for (let i = 0; i < data.events.length; i++) {
-        if (data.events[i].date < data.currentDate) {
-            const Evento = document.createElement('div');
-            Evento.classList.add('card');
-            Evento.innerHTML = `
-          <div style="width: 18rem;">
-              <img class="card-img-top" src="${data.events[i].image}" alt="Im event">
-              <div class="card-body">
-                <p class="date">${data.events[i].date}</p>   
-                <h5 class="card-title">${data.events[i].name}</h5>         
-                <p class="text-muted">${data.events[i].category}</p>
-                <p>Place: ${data.events[i].place}</p>
-                <p class="card-text">${data.events[i].description}<br>
-                <p>Capacity: ${data.events[i].capacity}</p>
-                <p>Assistance: ${data.events[i].assistance ? data.events[i].assistance : ''}</p>
-            </div>
-            <div class="card-footer">
-                <span>${data.events[i].price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
-                <a href="./details.html">Details</a>
-            </div>
-          </div>
-        `;
-            eventos_pasado.push(Evento);
-        }
-    }
+function pintarEventCard(evento) {
+    return `
+    <div class="fade-in">
+    <img class="card-img-top" src="${evento.image}" alt="Img event">
+    <div>
+      <p class="date">${evento.date}</p>   
+      <h5>${evento.name}</h5>         
+      <span class="category">${evento.category}</span>
+      <p>${evento.place}</p>
+      <p>${evento.description}</p>
+      <p>Capacity: ${evento.capacity} people</p>
+      <p>${evento.assistance !== undefined ? 'Assistance: ' + evento.assistance + ' People' : ''}</p>
+      <p>${evento.estimate !== undefined ? 'Estimate: ' + evento.estimate + ' People' : ''}</p>
+      <span class="price">${evento.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
+    </div>
+    <a href="./details.html?id=${encodeURIComponent(evento._id)}">Details</a>
+  </div>
+    `;
+}
 
-    return eventos_pasado;
+function pintarEventCards(events) {
+    const cards = document.querySelector('.cards');
+    cards.innerHTML = '';
+    events.forEach(evento => {
+        const Evento = document.createElement('div');
+        Evento.classList.add('Card');
+        Evento.innerHTML = pintarEventCard(evento);
+        cards.appendChild(Evento);
+    });
+}
+
+function buscarEventosPasados(data) {
+    const eventos_past = data.events.filter(evento => evento.date < data.currentDate);
+    eventos_past.sort((a, b) => new Date(a.date) - new Date(b.date));
+    return eventos_past;
 }
 
 const eventos_pasados = buscarEventosPasados(data);
-const cards = document.querySelector('.cards');
-eventos_pasados.forEach(evento => cards.appendChild(evento));
-console.log(eventos_pasados);
+pintarEventCards(eventos_pasados)
+
+
+function search() {
+    const categoryList = eventos_pasados
+        .map(event => event.category)
+        .filter((category, index, categories) => {
+            return categories.indexOf(category) === index;
+        });
+    const searchForm = document.querySelector('form.search');
+    const checkboxList = categoryList.map(category => `
+    <li>
+      <input type="checkbox" name="category" value="${category}">
+      <label>${category}</label>
+    </li>`).join('');
+
+    const searchDiv = `<input type="text" placeholder="Search">`;
+    searchForm.innerHTML = checkboxList + searchDiv;
+
+    const categoryInputs = searchForm.querySelectorAll('input[name="category"]');
+    categoryInputs.forEach(input => {
+        input.addEventListener('click', () => {
+            const searchInput = searchForm.querySelector('input[type="text"]');
+            const searchValue = searchInput.value.toLowerCase();
+            const categoriesInputs = searchForm.querySelectorAll('input[name="category"]:checked');
+            const categories = [...categoriesInputs].map(input => input.value);
+            const filteredEvents = eventos_pasados.filter(event => {
+                const nameMatches = event.name.toLowerCase().includes(searchValue);
+                const categoryMatches = categories.length === 0 || categories.includes(event.category);
+                return nameMatches && categoryMatches;
+            });
+            pintarEventCards(filteredEvents);
+        });
+    });
+
+    const searchInput = searchForm.querySelector('input[type="text"]');
+    searchInput.addEventListener('input', () => {
+        const searchValue = searchInput.value.toLowerCase();
+        const categoriesInputs = searchForm.querySelectorAll('input[name="category"]:checked');
+        const categories = [...categoriesInputs].map(input => input.value);
+        const filteredEvents = eventos_pasados.filter(event => {
+            const nameMatches = event.name.toLowerCase().includes(searchValue);
+            const categoryMatches = categories.length === 0 || categories.includes(event.category);
+            return nameMatches && categoryMatches;
+        });
+        pintarEventCards(filteredEvents);
+    });
+
+    searchForm.addEventListener('submit', event => {
+        event.preventDefault();
+    });
+}
+
+search();
