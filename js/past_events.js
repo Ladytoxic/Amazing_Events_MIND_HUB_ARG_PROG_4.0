@@ -1,22 +1,21 @@
 function pintarEventCard(evento) {
+    const { image, date, name, category, place, description, price, _id } = evento;
+  
     return `
-    <div class="fade-in">
-    <img class="card-img-top" src="${evento.image}" alt="Img event">
-    <div>
-      <p class="date">${evento.date}</p>   
-      <h5>${evento.name}</h5>         
-      <span class="category">${evento.category}</span>
-      <p>${evento.place}</p>
-      <p>${evento.description}</p>
-      <p>Capacity: ${evento.capacity} people</p>
-      <p>${evento.assistance !== undefined ? 'Assistance: ' + evento.assistance + ' People' : ''}</p>
-      <p>${evento.estimate !== undefined ? 'Estimate: ' + evento.estimate + ' People' : ''}</p>
-      <span class="price">${evento.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
-    </div>
-    <a href="./details.html?id=${encodeURIComponent(evento._id)}">Details</a>
-  </div>
+      <div class="fade-in">
+        <img class="card-img-top" src="${image}" alt="Img event">
+        <div>
+          <p class="date">${date}</p>   
+          <h5>${name}</h5>         
+          <span class="category">${category}</span>
+          <p>${place}</p>
+          <p>${description}</p>
+          <span class="price">${price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
+        </div>
+        <a href="./details.html?id=${_id}">Details</a>
+      </div>
     `;
-}
+  }
 
 function pintarEventCards(events) {
     const cards = document.querySelector('.cards');
