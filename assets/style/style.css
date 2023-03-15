@@ -316,7 +316,7 @@ th {
 
     nav li {
         display: block;
-        margin: 1rem;
+        margin: 1.1rem;
         width: 100%;
     }
 
@@ -340,7 +340,7 @@ th {
     }
 
     nav img {
-        width: 75px;
+        width: 60px;
     }
 
 
