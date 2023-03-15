@@ -6,7 +6,4 @@ menuButton.addEventListener("click", function () {
   menuList.classList.toggle("menu-visible");
 });
 
-closeButton.addEventListener("click", function () {
-  menuList.classList.toggle("menu-visible");
-});
 
