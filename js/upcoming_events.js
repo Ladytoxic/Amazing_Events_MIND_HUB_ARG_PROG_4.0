@@ -3,7 +3,7 @@ function pintarEventCard(evento) {
 
   return `
     <div class="fade-in">
-      <img class="card-img-top" src="${image}" alt="Img event">
+      <img src="${image}" alt="${name} ${description}">
       <div>
         <p class="date">${date}</p>   
         <h5>${name}</h5>         
@@ -66,6 +66,14 @@ function search() {
         return nameMatches && categoryMatches;
       });
       pintarEventCards(filteredEvents);
+      if (filteredEvents.length === 0) {
+        const noResults = document.createElement('h5');
+        noResults.classList.add('no_results')
+        noResults.textContent = 'No results found.';
+        const eventsContainer = document.querySelector('.cards');
+        eventsContainer.innerHTML = '';
+        eventsContainer.appendChild(noResults);
+      }
     });
   });
 
@@ -80,11 +88,20 @@ function search() {
       return nameMatches && categoryMatches;
     });
     pintarEventCards(filteredEvents);
+    if (filteredEvents.length === 0) {
+      const noResults = document.createElement('h5');
+      noResults.classList.add('no_results')
+      noResults.textContent = 'No results found.';
+      const eventsContainer = document.querySelector('.cards');
+      eventsContainer.innerHTML = '';
+      eventsContainer.appendChild(noResults);
+    }
   });
 
   searchForm.addEventListener('submit', event => {
     event.preventDefault();
   });
+
 }
 
 search();

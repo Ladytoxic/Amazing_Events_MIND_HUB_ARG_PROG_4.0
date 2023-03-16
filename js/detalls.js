@@ -1,14 +1,14 @@
- const urlParams = new URLSearchParams(location.search);
- const id = parseInt(urlParams.get('id'));
- const eventoBusc = data.events.find(evento => evento._id === id);
+const urlParams = new URLSearchParams(location.search);
+const id = parseInt(urlParams.get('id'));
+const eventoBusc = data.events.find(evento => evento._id === id);
 
- function pintarEventCard(evento) {
-   const container = document.querySelector('.container');
-   const card = document.createElement('div');
-   card.classList.add('Card');
-   card.innerHTML = `
+function pintarEventCard(evento) {
+  const container = document.querySelector('.container');
+  const card = document.createElement('div');
+  card.classList.add('Card');
+  card.innerHTML = `
        <div class="fade-in">
-         <img class="card-img-top" src="${evento.image}" alt="Img event">
+         <img src="${evento.image}" alt="${evento.name} ${evento.description}">
          <div>
              <p class="date">${evento.date}</p>   
              <h5>${evento.name}</h5>         
@@ -23,9 +23,9 @@
        </div>
      `;
 
-   container.appendChild(card);
- }
+  container.appendChild(card);
+}
 
 
- pintarEventCard(eventoBusc);
+pintarEventCard(eventoBusc);
 

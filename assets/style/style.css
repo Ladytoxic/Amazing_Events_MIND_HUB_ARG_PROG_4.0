@@ -4,8 +4,8 @@
     box-sizing: border-box;
     font-family: sans-serif;
     letter-spacing: 1px;
+    -webkit-tap-highlight-color: transparent;
 }
-
 
 body {
     background: rgb(230, 178, 202);
@@ -32,7 +32,7 @@ nav {
 li {
     list-style: none;
     display: inline-block;
-    margin: 0 1rem;
+    margin: 0 0.5rem;
 
 }
 
@@ -52,11 +52,11 @@ nav a {
     display: none;
 }
 
-#close-menu {
-    display: none;
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
 }
-
-
 
 main {
     min-height: 60vh;
@@ -71,11 +71,9 @@ main {
 }
 
 .hero {
+    background-color: #ffffff;
     height: 30vh;
     width: 100vw;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #ffffff;
 }
 
 
@@ -103,7 +101,10 @@ main {
     padding: 0.1rem;
 }
 
-
+.search label {
+    color: #292929;
+    font-weight: 500;
+}
 
 input[type="text"] {
     text-indent: 1rem;
@@ -111,6 +112,10 @@ input[type="text"] {
     border: none;
     flex-grow: 2;
 
+}
+
+.no_results {
+    font-size: 2rem;
 }
 
 .cards {
@@ -295,21 +300,12 @@ th {
 
 /* Mediaquerie */
 
+
+
 @media (max-width: 900px) {
-    nav li {
-        margin: 0 auto;
-    }
-
-    .contant {
-        width: 80%;
-    }
-
-
-}
-
-@media (max-width: 750px) {
     nav {
-        align-items: self-start;
+        position: relative;
+        display: block;
         height: auto;
         transition: all 0.5s;
     }
@@ -326,17 +322,25 @@ th {
     nav button {
         text-align: right;
         width: 100%;
+
     }
 
     #menu {
         display: block;
-        margin: none;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 1.5rem;
+        z-index: 10;
     }
 
+    #menu i {
+        font-size: 1.7rem;
+        font-weight: 700;
+    }
 
-    #close-menu {
-        margin: none;
-        display: block;
+    #menu:hover {
+        transform: scale(1);
     }
 
     nav img {
@@ -344,8 +348,12 @@ th {
     }
 
 
-    nav ul.menu-visible {
+    nav .menu-visible {
         display: none;
+        position: absolute;
+        background-color: #df6da3;
+        top: 1.5rem;
+        right: 1;
         width: 100%;
     }
 
@@ -363,7 +371,14 @@ th {
     .social {
         margin: 1rem;
     }
+}
 
+@media (max-width: 592px) {
+
+    .Card {
+        width: 100%;
+        max-width: 90%;
+    }
 }
 
 
@@ -382,30 +397,33 @@ th {
 }
 
 .heartbeat {
-	animation: heartbeat 1.5s ease-in-out infinite both;
+    animation: heartbeat 1.5s ease-in-out infinite both;
 }
 
- @keyframes heartbeat {
+@keyframes heartbeat {
     from {
-      transform: scale(1);
-      transform-origin: center center;
-      animation-timing-function: ease-out;
+        transform: scale(1);
+        transform-origin: center center;
+        animation-timing-function: ease-out;
     }
+
     10% {
-      transform: scale(0.91);
-      animation-timing-function: ease-in;
+        transform: scale(0.91);
+        animation-timing-function: ease-in;
     }
+
     17% {
-      transform: scale(0.98);
-      animation-timing-function: ease-out;
+        transform: scale(0.98);
+        animation-timing-function: ease-out;
     }
+
     33% {
-      transform: scale(0.87);
-      animation-timing-function: ease-in;
+        transform: scale(0.87);
+        animation-timing-function: ease-in;
     }
+
     45% {
-      transform: scale(1);
-      animation-timing-function: ease-out;
+        transform: scale(1);
+        animation-timing-function: ease-out;
     }
-  }
-  
+}
