@@ -1,9 +1,24 @@
+let dataEvents
+const container = document.querySelector('.container');
+const loader = container.querySelector('.loader');
+
 const urlParams = new URLSearchParams(location.search);
 const id = parseInt(urlParams.get('id'));
-const eventoBusc = data.events.find(evento => evento._id === id);
+
+
+fetch('https://mindhub-xj03.onrender.com/api/amazing')
+  .then(response => response.json())
+  .then(data => {
+    dataEvents = data
+    const eventoBusc = dataEvents.events.find(evento => evento._id === id);
+    pintarEventCard(eventoBusc);
+    loader.style.display = 'none';
+  })
+  .catch(error => console.log(error));
+
+loader.style.display = 'block';
 
 function pintarEventCard(evento) {
-  const container = document.querySelector('.container');
   const card = document.createElement('div');
   card.classList.add('Card');
   card.innerHTML = `
@@ -26,6 +41,4 @@ function pintarEventCard(evento) {
   container.appendChild(card);
 }
 
-
-pintarEventCard(eventoBusc);
 
