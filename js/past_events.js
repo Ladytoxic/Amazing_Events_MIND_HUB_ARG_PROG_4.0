@@ -1,3 +1,20 @@
+let dataEvents;
+let eventos_pasados;
+const cards = document.querySelector('.cards');
+const loader = cards.querySelector('.loader');
+
+fetch('https://mindhub-xj03.onrender.com/api/amazing')
+  .then(response => response.json())
+  .then(data => {
+    dataEvents = data
+    eventos_pasados = buscarEventosPasados(dataEvents);
+    pintarEventCards(eventos_pasados);
+    search();
+    loader.style.display = 'none';
+  })
+  .catch(error => console.log(error));
+loader.style.display = 'block';
+
 function pintarEventCard(evento) {
   const { image, date, name, category, place, description, price, _id } = evento;
 
@@ -18,7 +35,6 @@ function pintarEventCard(evento) {
 }
 
 function pintarEventCards(events) {
-  const cards = document.querySelector('.cards');
   cards.innerHTML = '';
   events.forEach(evento => {
     const Evento = document.createElement('div');
@@ -34,9 +50,6 @@ function buscarEventosPasados(data) {
   return eventos_past;
 }
 
-const eventos_pasados = buscarEventosPasados(data);
-pintarEventCards(eventos_pasados)
-
 function search() {
   const categoryList = eventos_pasados
     .map(event => event.category)
@@ -44,12 +57,14 @@ function search() {
       return categories.indexOf(category) === index;
     });
   const searchForm = document.querySelector('form.search');
-  const checkboxList = categoryList.map(category => `
-        <li>
-          <input type="checkbox" name="category" value="${category}">
-          <label>${category}</label>
-        </li>
-      `).join('');
+  const checkboxList = `<ul class="listCheck">${categoryList.map(category => `
+    <li>
+    <label>
+      <input type="checkbox" name="category" value="${category}" class="my-checkbox">
+       ${category}
+    </label>
+    </li>
+    `).join('')}</ul>`;
   const searchDiv = `<input type="text" placeholder="Search">`;
   searchForm.innerHTML = checkboxList + searchDiv;
 
@@ -104,4 +119,3 @@ function search() {
 
 }
 
-search();
