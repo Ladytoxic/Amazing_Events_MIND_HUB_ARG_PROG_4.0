@@ -25,25 +25,25 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
 
 function buscarEventosPasados(data) {
     const eventos_past = data.events.filter(evento => evento.date < data.currentDate);
-    eventos_past.sort((a, b) => b.assistance - a.assistance);
-
-    const eventos_pasados_con_porcentaje = eventos_past.map(evento => {
-        const attendance_percentage = Math.round((evento.assistance / evento.capacity) * 100).toFixed(2);
-        const revenues = Math.round(evento.price * evento.assistance);
-        return { ...evento, attendance_percentage, revenues };
-    });
-    return eventos_pasados_con_porcentaje;
+    return eventos_past;
 }
 
 function buscarEventosProximos(data) {
     const eventos_prox = data.events.filter(evento => evento.date >= data.currentDate);
-    eventos_prox.sort((a, b) => b.estimate - a.estimate);
     return eventos_prox;
+}
 
+function percentage(assistance) {
+    const events_percentage = assistance.map(evento => {
+        const attendance_percentage = ((evento.assistance / evento.capacity) * 100).toFixed(2);
+        return { ...evento, attendance_percentage };
+    });
+    return events_percentage
 }
 
 function pintarEventsTable(evento) {
-    const dos_mayores_assistance = evento.slice(0, 2);
+    evento.sort((a, b) => b.assistance - a.assistance);
+    const assistance = percentage(evento.slice(0, 2));
     const evento_capacity = evento.reduce((event1, event2) => {
         if (event1.capacity > event2.capacity) {
             return event1;
@@ -52,10 +52,11 @@ function pintarEventsTable(evento) {
         }
     });
 
+
     events_statistics.innerHTML = `
     <tr>
-        <td>${dos_mayores_assistance[0].name} (${dos_mayores_assistance[0].attendance_percentage}%)</td>
-        <td>${dos_mayores_assistance[1].name} (${dos_mayores_assistance[1].attendance_percentage}%)</td>
+        <td>${assistance[1].name} (${assistance[1].attendance_percentage}%)</td>
+        <td>${assistance[0].name} (${assistance[0].attendance_percentage}%)</td>
         <td>${evento_capacity.name} (${evento_capacity.capacity})</td>
     </tr>`;
     statisticsByCategory(eventos_pasados, past_events);
@@ -78,7 +79,7 @@ function statisticsByCategory(events, tabla) {
         const categoryEvents = eventsByCategory[category];
         const totalCapacity = categoryEvents.reduce((acc, event) => acc + event.capacity, 0);
         const totalAssistance = categoryEvents.reduce((acc, event) => acc + (event.assistance || event.estimate), 0);
-        const attendancePercentage = Math.round((totalAssistance / totalCapacity) * 100).toFixed(2);
+        const attendancePercentage = ((totalAssistance / totalCapacity) * 100).toFixed(2);
         const totalRevenues = categoryEvents.reduce((acc, event) => acc + (event.price * (event.assistance || event.estimate)), 0);
 
         return {
@@ -92,7 +93,7 @@ function statisticsByCategory(events, tabla) {
         <tr>
         <td>${evento.category}</td>
             <td>${evento.totalRevenues.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
-            <td>(${evento.attendancePercentage}%)</td>
+            <td>${evento.attendancePercentage}%</td>
         </tr>
         `;
     });
