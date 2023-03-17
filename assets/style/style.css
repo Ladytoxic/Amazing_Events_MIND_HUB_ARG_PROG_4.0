@@ -84,17 +84,12 @@ main {
     height: 60px;
     animation: spin 2s linear infinite;
     margin: auto;
-  }
+}
   
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
 .search {
     display: flex;
-    justify-content: center;
-    align-items: stretch;
+    justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
     background-color: #df6da3;
     padding: 1rem;
@@ -108,10 +103,7 @@ main {
 .search ul {
     display: inline-block;
     flex-grow: 1;
-}
-
-.search label {
-    padding: 0.1rem;
+    user-select: none;
 }
 
 .search label {
@@ -148,7 +140,6 @@ input[type="text"] {
     padding-bottom: 2rem;
     background: rgb(255, 255, 255);
 }
-
 
 .Card h5 {
     font-size: 1.5rem;
@@ -306,7 +297,7 @@ table,
 td,
 th {
     border: 1px solid gray !important;
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 
@@ -397,6 +388,16 @@ th {
 
 .fade-in {
     animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes fade-in {
