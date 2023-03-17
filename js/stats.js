@@ -41,28 +41,6 @@ function percentage(assistance) {
     return events_percentage
 }
 
-function pintarEventsTable(evento) {
-    evento.sort((a, b) => b.assistance - a.assistance);
-    const assistance = percentage(evento.slice(0, 2));
-    const evento_capacity = evento.reduce((event1, event2) => {
-        if (event1.capacity > event2.capacity) {
-            return event1;
-        } else {
-            return event2;
-        }
-    });
-
-
-    events_statistics.innerHTML = `
-    <tr>
-        <td>${assistance[1].name} (${assistance[1].attendance_percentage}%)</td>
-        <td>${assistance[0].name} (${assistance[0].attendance_percentage}%)</td>
-        <td>${evento_capacity.name} (${evento_capacity.capacity})</td>
-    </tr>`;
-    statisticsByCategory(eventos_pasados, past_events);
-    statisticsByCategory(eventos_proximos, upcoming_events);
-}
-
 function eventsCategory(events) {
     return events.reduce((acc, event) => {
         if (!acc[event.category]) {
@@ -100,3 +78,25 @@ function statisticsByCategory(events, tabla) {
     return statisticsByCategory;
 }
 
+function pintarEventsTable(evento) {
+    const perc = percentage(evento);
+    perc.sort((a, b) => b.attendance_percentage - a.attendance_percentage);
+    const assistMayor = perc.slice(0, 1);
+    const assistMenor = perc.slice(-1)
+    const evento_capacity = evento.reduce((event1, event2) => {
+        if (event1.capacity > event2.capacity) {
+            return event1;
+        } else {
+            return event2;
+        }
+    });
+
+    events_statistics.innerHTML = `
+            <tr>
+                <td>${assistMayor[0].name} (${assistMayor[0].attendance_percentage}%)</td>
+                <td>${assistMenor[0].name} (${assistMenor[0].attendance_percentage}%)</td>
+                <td>${evento_capacity.name} (${evento_capacity.capacity})</td>
+            </tr>`;
+    statisticsByCategory(eventos_pasados, past_events);
+    statisticsByCategory(eventos_proximos, upcoming_events);
+}
