@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="What does it take to turn an ordinary event into an amazing event? It takes energy, creativity, ingenuity and an over-developed sense of fun! Let us take your goals, ideas, dreams and visions and make them come to life! If it can be done, Amazing Events® can do it with style.">
+    <meta name="description"
+        content="What does it take to turn an ordinary event into an amazing event? It takes energy, creativity, ingenuity and an over-developed sense of fun! Let us take your goals, ideas, dreams and visions and make them come to life! If it can be done, Amazing Events® can do it with style.">
     <meta name="keywords" content="Events, Amazing Events">
     <link rel="stylesheet" href="./assets/style/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -38,87 +39,45 @@
     </header>
     <main>
         <div class="container-fluid">
-            <table>
+            <!-- <div class="loader"></div> -->
+            <table id="tabla">
                 <thead>
-                    <tr>
+                    <tr class="title">
                         <th colspan="3">Events statistics</th>
                     </tr>
+                    <tr>
+                        <th colspan="2">Events with the highest percentage of attendance</th>
+                        <th>Events with larger capacity</th>
+                    </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Events with the highest percentage of attendance</td>
-                        <td>Events with the lowest percentage of attendance</td>
-                        <td>Events with larger capacity</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                <tbody id="events_statistics">
+       
                 </tbody>
                 <thead>
-                    <tr>
+                    <tr class="title">
                         <th colspan="3">Upcoming events statistics by category</th>
                     </tr>
+                    <tr>
+                        <th>Category</th>
+                        <th>Revenues</th>
+                        <th>percentage of attendance</th>
+                    </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Category</td>
-                        <td>Revenues</td>
-                        <td>percentage of attendance</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                <tbody id="upcoming_events">
+ 
                 </tbody>
                 <thead>
-                    <tr>
+                    <tr class="title">
                         <th colspan="3">Past events statistics by category</th>
                     </tr>
+                    <tr>
+                        <th>Category</th>
+                        <th>Revenues</th>
+                        <th>percentage of attendance</th>
+                    </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Category</td>
-                        <td>Revenues</td>
-                        <td>percentage of attendance</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                <tbody id="past_events">
+       
                 </tbody>
             </table>
         </div>
@@ -131,7 +90,7 @@
         </div>
         <p>Almendra Romina 2023 &copy;</p>
     </footer>
-
+    <script src="./js/stats.js"></script>
     <script src="./js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
