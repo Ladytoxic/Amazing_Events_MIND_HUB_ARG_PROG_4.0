@@ -289,15 +289,25 @@ table {
 }
 
 thead th {
-    background-color: #e4abc6;
+    background-color: #e9a6c5;
     border-bottom: 2px solid black;
 }
 
 table,
 td,
-th {
+th
+{
     border: 1px solid gray !important;
     padding: 0.5rem;
+}
+
+
+.title {
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 1rem;
+    background-color: #d90368;
+    color: #292929;
 }
 
 
