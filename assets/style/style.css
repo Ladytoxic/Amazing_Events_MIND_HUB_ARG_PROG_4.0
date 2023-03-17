@@ -283,8 +283,9 @@ footer {
 }
 
 table {
+    width: 100%;
     border-collapse: separate;
-    margin: auto;
+    margin: 1rem;
     background-color: #ffffff;
 }
 
@@ -297,6 +298,7 @@ table,
 td,
 th
 {
+    font-size: 0.9rem;
     border: 1px solid gray !important;
     padding: 0.5rem;
 }
